@@ -1,34 +1,41 @@
-bool dfs(int ** graph, int n, int * visited , int src){
-    visited[src]=1;
-    for(int i = 0 ; i < n ; i ++ ){
-        if(graph[src][i]){
-            if(!visited[i]&&dfs(graph,n,visited,i)){
-                return true;
-            }else if(visited[i]==1){
-                return true;
-            }
-        }
-    }
-    visited[src]=2;
-    return false;
-}
-bool cycle(int ** graph , int n){
-    int *visited = (int *)calloc(n,sizeof(int));
-    for(int i =0 ; i < n ; i ++){
-        if(!visited[i]){
-            if(dfs(graph,n,visited,i))return false;
-        }
-    }
-    return true;
-}
+typedef struct node {
+    int course;
+    struct node *next;
+} node;
 
 bool canFinish(int numCourses, int** prerequisites, int prerequisitesSize, int* prerequisitesColSize) {
-        int ** graph = ( int **)malloc(sizeof(int *)*numCourses);
-        for(int i = 0 ; i < numCourses ; i ++){
-            graph[i]=(int *)calloc(numCourses,sizeof(int));
+    node *graph[numCourses];
+    int indegree[numCourses];
+    for (int i = 0; i < numCourses; i++) {
+        graph[i] = NULL;
+        indegree[i] = 0;
+    }
+    
+    for (int i = 0; i < prerequisitesSize; i++) {
+        int course = prerequisites[i][0], prereq = prerequisites[i][1];
+        node *new_node = (node *)malloc(sizeof(node));
+        new_node->course = course;
+        new_node->next = graph[prereq];
+        graph[prereq] = new_node;
+        indegree[course]++;
+    }
+    int taken_courses = 0, queue[numCourses], index = 0, curr = 0;
+    for (int i = 0; i < numCourses; i++) {
+        if (indegree[i] == 0) {
+            queue[index++] = i;
         }
-        for(int i = 0 ; i < prerequisitesSize ; i++){
-            graph[prerequisites[i][1]][prerequisites[i][0]]=1;
+    }
+    while (curr < index) {
+        node *tmp = graph[queue[curr]];
+        while (tmp) {
+            indegree[tmp->course]--;
+            if (indegree[tmp->course] == 0) {
+                queue[index++] = tmp->course;
+            }
+            tmp = tmp->next;
         }
-        return cycle(graph,numCourses);
+        curr++;
+        taken_courses++;
+    }
+    return taken_courses == numCourses;
 }
