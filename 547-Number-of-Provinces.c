@@ -1,5 +1,5 @@
 void bfs(int ** graph , int n , int * visited, int source){
-    int queue[2*n];
+    int queue[n];
     int front = 0 , rear=0;
     queue[rear++]=source;
     visited[source]=1;
@@ -9,7 +9,7 @@ void bfs(int ** graph , int n , int * visited, int source){
             if(!visited[i] && graph[s][i]){
                 visited[i]=1;
                 queue[rear++]=i;
-                }
+            }
         }
     }
 }
