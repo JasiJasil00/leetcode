@@ -5,9 +5,9 @@ public:
 
        int val = 1;
        while(val*2 < n){
-        val*=2;
+         val*=2;
        }
-
+       
        return 1 + min(minOperations(val*2-n),minOperations(n-val));
     }
 };
