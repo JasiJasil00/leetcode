@@ -19,7 +19,6 @@ public:
         for(int i = 1; i < left ; i++){
             temp=temp->next;
         }
-        p=temp;
         if(temp->next==nullptr)return head;
         ListNode * current = temp->next;
         ListNode * prev = NULL;
