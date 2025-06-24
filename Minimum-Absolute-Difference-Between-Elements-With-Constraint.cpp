@@ -11,7 +11,8 @@ public:
             if (it != bst.begin()) {
                 --it;
                 min = std::min(min, abs(*it - nums[i]));
-            }    
+            }
+            if(min==0)return 0;    
         }
         return min;
     }
