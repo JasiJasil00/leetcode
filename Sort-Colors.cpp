@@ -1,16 +1,19 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        vector<int> count(3,0);
-        int i;
-        for(i = 0 ; i < nums.size(); i ++){
-            count[nums[i]]++;
-        }
-        i = 0;
-        for(int j = 0; j < 3 ; j ++){
-            while(count[j]>0){
-                nums[i++]=j;
-                count[j]--;
+        int mid = 0;
+        int low = 0;
+        int high = nums.size()-1;
+        while(mid<high+1){
+            if(nums[mid]==0){
+                swap(nums[mid],nums[low]);
+                mid++;
+                low++;
+            }else if(nums[mid]==1){
+                mid++;
+            }else{
+                swap(nums[mid],nums[high]);
+                high--;
             }
         }
     }
