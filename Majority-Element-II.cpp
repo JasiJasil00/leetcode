@@ -7,12 +7,8 @@ public:
 
         for (int num : nums) {
             freq[num]++;
-        }
-
-        for (auto &entry : freq) {
-            if (entry.second > n / 3) {
-                result.push_back(entry.first);
-            }
+            if(freq[num] > n/3 && (result.size()==0 || result[0]!=num))result.push_back(num);
+            if(result.size()==2)break;
         }
 
         return result;
