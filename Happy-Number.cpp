@@ -1,19 +1,21 @@
 class Solution {
 public:
-    bool isHappy(int n) {
-         unordered_set<int> seen;  // to detect cycles
-
-        while (n != 1 && !seen.count(n)) {
-            seen.insert(n);
-            int sum = 0;
-            while (n != 0) {
-                int digit = n % 10;
-                sum += digit * digit;
-                n /= 10;
-            }
-            n = sum;
+    int getNext(int n) {
+        int sum = 0;
+        while (n != 0) {
+            int digit = n % 10;
+            sum += digit * digit;
+            n /= 10;
         }
+        return sum;
+    }
 
-        return n == 1;
+    bool isHappy(int n) {
+        int slow = n, fast = getNext(n);
+        while (fast != 1 && slow != fast) {
+            slow = getNext(slow);
+            fast = getNext(getNext(fast));
+        }
+        return fast == 1;
     }
 };
