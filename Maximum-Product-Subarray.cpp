@@ -1,19 +1,16 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        long long product = 1;
-        long long max = INT_MIN;
-        int n = nums.size();
-        for(int i = 0 ; i < n ; i++ ){
-            product*=nums[i];
-            max = std::max(max,product);
-            if(product==0)product=1;
-        }
-        product=1;
-        for(int i = n-1 ; i >=0 ; i--){
-            product*=nums[i];
-            max = std::max(max,product);
-            if(product==0)product=1;
+        int max = INT_MIN;
+        int prefsum = 1;
+        int suffsum =1;
+        for( int i = 0 ; i  < nums.size() ; i++){
+            prefsum*=nums[i];
+            suffsum*=nums[nums.size()-1-i];
+            max = std::max(max,suffsum);
+            max=std::max(max,prefsum);
+            if(prefsum==0)prefsum=1;
+            if(suffsum==0)suffsum=1;
         }
         return max;
     }
