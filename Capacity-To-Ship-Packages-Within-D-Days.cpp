@@ -17,14 +17,16 @@ public:
     }
     int shipWithinDays(vector<int>& weights, int days) {
         int max = INT_MIN;
+        int sum = 0;
         for (int i = 0; i < weights.size(); i++) {
             if (max < weights[i])
                 max = weights[i];
+                sum+=weights[i];
         }
         if (days >= weights.size())
             return max;
         int low = max;
-        int high = max * weights.size();
+        int high = sum;
         int ans = -1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
