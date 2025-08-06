@@ -29,7 +29,6 @@ public:
             int mid = low + (high - low)/ 2;
             if (possible(nums, k, mid)){
                 ans = mid;
-                cout << ans << " ";
                 high = mid - 1;
             } else {
                 low = mid + 1;
