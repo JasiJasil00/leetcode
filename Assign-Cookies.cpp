@@ -10,6 +10,6 @@ public:
             if(g[i]>s[j])j++;
             else if(g[i]<=s[j]){count++; i++; j++;}
         }
-        return count;
+        return i;
     }
 };
