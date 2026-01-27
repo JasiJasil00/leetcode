@@ -26,7 +26,7 @@
 26            auto [d, u] = pq.top();
 27            pq.pop();
 28
-29            if (d > dist[u]) continue;
+29           
 30
 31            for (auto &[v, w] : graph[u]) {
 32                if (dist[u] + w < dist[v]) {
