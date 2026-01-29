@@ -1,25 +1,21 @@
-class Solution {
-public:
-    string reverseWords(string s) {
-       while (!s.empty() && s.front() == ' ') s.erase(s.begin());
-while (!s.empty() && s.back() == ' ') s.pop_back();
-        int i=0;
-        while(i<s.size()-1){
-            while(s[i]==' ' && s[i+1]==' '){
-                s.erase(s.begin()+i);
-            }
-            i++;
-        }
-        reverse(s.begin(),s.end());
-        i = 0;
-        while(i<s.size()){
-            int j = i;
-            while(i < s.size() && s[i] != ' '){
-                i++;
-            }
-            reverse(s.begin()+j,s.begin()+i);
-            i++;
-        }
-        return s;
-    }
-};
+1class Solution {
+2public:
+3    string reverseWords(string s) {
+4        int i=s.size()-1;
+5        string result = "";
+6
+7        while( i >= 0 ){
+8            while(i>=0 && s[i]==' ')i--;
+9            if(i < 0)break;
+10            int end =i;
+11            while(i>=0 && s[i]!=' ')i--;
+12            string word = s.substr(i + 1, end - i);
+13            if (!result.empty()) {
+14                result += " ";
+15            }
+16             result += word;
+17
+18        }
+19        return result;
+20    }
+21};
