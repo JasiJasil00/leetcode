@@ -11,15 +11,24 @@
 11class Solution {
 12public:
 13    bool isPalindrome(ListNode* head) {
-14        vector <int> pq;
+14        if(head==NULL && head->next==nullptr)return true;
 15        ListNode * temp = head;
-16        while(temp!=NULL){
-17            pq.push_back(temp->val);
-18            temp = temp->next;
-19        }
-20        for(int i = 0 ; i < pq.size()/2 ; i++){
-21            if(pq[i]!=pq[pq.size()-1-i])return false;
+16        ListNode * slow = head;
+17        stack<ListNode*>s;
+18        while(temp!=NULL && temp->next!=NULL){
+19            s.push(slow);
+20            slow=slow->next;
+21            temp=temp->next->next;
 22        }
-23        return true;
-24    }
-25};
+23        if (temp != NULL) {
+24            slow = slow->next;
+25        }
+26        while(!s.empty()&&slow!=NULL){
+27            if(slow->val!=s.top()->val){
+28                return false;
+29            }s.pop();
+30                slow=slow->next;
+31        }
+32        return true;
+33    }
+34};
