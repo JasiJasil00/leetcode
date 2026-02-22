@@ -1,34 +1,25 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    bool isPalindrome(ListNode* head) {
-        if(head==NULL && head->next==nullptr)return true;
-        ListNode * temp = head;
-        ListNode * slow = head;
-        stack<ListNode*>s;
-        while(temp!=NULL && temp->next!=NULL){
-            s.push(slow);
-            slow=slow->next;
-            temp=temp->next->next;
-        }
-        if (temp != NULL) {
-            slow = slow->next;
-        }
-        while(!s.empty()&&slow!=NULL){
-            if(slow->val!=s.top()->val){
-                return false;
-            }s.pop();
-                slow=slow->next;
-        }
-        return true;
-    }
-};
+1/**
+2 * Definition for singly-linked list.
+3 * struct ListNode {
+4 *     int val;
+5 *     ListNode *next;
+6 *     ListNode() : val(0), next(nullptr) {}
+7 *     ListNode(int x) : val(x), next(nullptr) {}
+8 *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+9 * };
+10 */
+11class Solution {
+12public:
+13    bool isPalindrome(ListNode* head) {
+14        vector <int> pq;
+15        ListNode * temp = head;
+16        while(temp!=NULL){
+17            pq.push_back(temp->val);
+18            temp = temp->next;
+19        }
+20        for(int i = 0 ; i < pq.size()/2 ; i++){
+21            if(pq[i]!=pq[pq.size()-1-i])return false;
+22        }
+23        return true;
+24    }
+25};
