@@ -1,11 +1,17 @@
 1class Solution {
 2public:
-3    vector<int> getConcatenation(vector<int>& nums) {
-4        int n = nums.size();
-5        vector<int> result;
-6        for(int i = 0 ; i < 2*n ; i++){
-7            result.push_back(nums[i%n]);
-8        }
-9        return result; 
-10    }
-11};
+3    int findMaxConsecutiveOnes(vector<int>& nums) {
+4         int i = 0;
+5        int max = 0;
+6        for (int j = 0; j < nums.size() ; j++){
+7            if(nums[j]==1){
+8                i++;
+9            }else{
+10                if(max < i)max=i;
+11                i=0;
+12            }
+13        }
+14        if(max < i)max=i;
+15        return max;
+16    }
+17};
