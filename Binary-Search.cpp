@@ -1,14 +1,18 @@
-class Solution {
-public:
-    int recursive(vector<int> &nums, int target, int low, int high){
-        if(low>high)return -1;
-        int mid = (low+high)/2;
-        if(nums[mid]==target) return mid;
-        else if(nums[mid]>target) return recursive(nums,target,low,mid-1);
-        else return recursive(nums,target,mid+1,high);
-
-    }
-    int search(vector<int>& nums, int target) {
-        return recursive(nums,target,0,nums.size()-1);
-    }
-};
+1class Solution {
+2public:
+3    int search(vector<int>& nums, int target) {
+4        int left = 0;
+5        int right = nums.size()-1;
+6        while(left<=right){
+7            int mid = left + ((right-left)/2);
+8            if(nums[mid]>target){
+9                right=mid-1;
+10            }else if(nums[mid]<target){
+11                left = mid+1;
+12            }else{
+13                return mid;
+14            }
+15        }
+16        return -1;
+17    }
+18};
