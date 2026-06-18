@@ -1,35 +1,33 @@
-class Solution {
-public:
-    void findFirst(vector<int>& nums, int target, int low, int high, int& first) {
-        if (low > high) return;
-        int mid = (low + high) / 2;
-        if (nums[mid] == target) {
-            first = mid;
-            findFirst(nums, target, low, mid - 1, first);  // go left
-        } else if (nums[mid] > target) {
-            findFirst(nums, target, low, mid - 1, first);
-        } else {
-            findFirst(nums, target, mid + 1, high, first);
-        }
-    }
-
-    void findLast(vector<int>& nums, int target, int low, int high, int& last) {
-        if (low > high) return;
-        int mid = (low + high) / 2;
-        if (nums[mid] == target) {
-            last = mid;
-            findLast(nums, target, mid + 1, high, last);  // go right
-        } else if (nums[mid] > target) {
-            findLast(nums, target, low, mid - 1, last);
-        } else {
-            findLast(nums, target, mid + 1, high, last);
-        }
-    }
-    vector<int> searchRange(vector<int>& nums, int target) {
-        int lower = -1;
-        int upper = -1;
-        findFirst(nums,target,0,nums.size()-1,lower);
-        findLast(nums,target,0,nums.size()-1,upper);
-        return{lower,upper};
-    }
-};
+1class Solution {
+2public:
+3    vector<int> searchRange(vector<int>& nums, int target) {
+4        vector<int> result = {-1,-1};
+5        int left = 0 ;
+6        int right = nums.size()-1;
+7        while(left<=right){
+8            int mid = left +((right-left)/2);
+9            if(nums[mid]>target){
+10                right = mid-1;;
+11            }else if(nums[mid]<target){
+12                left = mid+1;
+13            }else{
+14                right = mid-1;
+15                result[0]=mid;
+16            }
+17        }
+18         left = 0 ;
+19         right = nums.size()-1;
+20        while(left<=right){
+21            int mid = left +((right-left)/2);
+22            if(nums[mid]>target){
+23                right = mid-1;;
+24            }else if(nums[mid]<target){
+25                left = mid+1;
+26            }else{
+27                left = mid+1;
+28                result[1]=mid;
+29            }
+30        }
+31        return result;
+32    }
+33};
