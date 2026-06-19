@@ -16,15 +16,13 @@
 16                    left=mid+1;
 17                }
 18            }else{
-19                if(nums[right]<target){
-20                    right=mid-1;
-21                }else if(nums[mid]>target){
-22                    right=mid-1;
-23                }else{
-24                    left = mid+1;
-25                }
-26            }
-27        }
-28        return pos;
-29    }
-30};
+19                if(nums[right]>=target && nums[mid]<target){
+20                    left = mid+1;
+21                }else{
+22                    right = mid-1;
+23                }
+24            }
+25        }
+26        return pos;
+27    }
+28};
