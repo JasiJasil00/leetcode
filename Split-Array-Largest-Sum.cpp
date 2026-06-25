@@ -1,39 +1,34 @@
-class Solution {
-public:
-    bool possible(vector<int>& nums, int k, int val) {
-        int count = 1; // start with 1 subarray
-    int total = 0;
-    for (int num : nums) {
-        if (total + num > val) { 
-            count++;
-            total = num; // start new subarray with current number
-            if (count > k) return false; // too many splits
-        } else {
-            total += num;
-        }
-    }
-    return true;
-    }
-    int splitArray(vector<int>& nums, int k) {
-        int max = INT_MIN;
-        int sum = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            if (max < nums[i])
-                max = nums[i];
-            sum += nums[i];
-        }
-        int low = max;
-        int high = sum;
-        int ans = -1;
-        while (low <= high) {
-            int mid = low + (high - low)/ 2;
-            if (possible(nums, k, mid)){
-                ans = mid;
-                high = mid - 1;
-            } else {
-                low = mid + 1;
-            }
-        }
-        return ans;
-    }
-};
+1class Solution {
+2public:
+3    bool possible(vector<int>& nums, int k , int s){
+4        int count = 0;
+5        int sum = 0;
+6        for(int n : nums){
+7            if(sum+n <= s){
+8                sum+=n;
+9            }else{
+10                sum = n;
+11                count++;
+12            }
+13            if(count>=k)return true;
+14        }
+15        return count>=k;
+16    }
+17    int splitArray(vector<int>& nums, int k) {
+18        int low = nums[0];
+19        int high = 0;
+20        for(int n : nums){
+21            if(n>low)low=n;
+22            high+=n;
+23        }
+24        while(low<=high){
+25            int mid = low + ((high-low)/2);
+26            if(possible(nums,k,mid)){
+27                low=mid+1;
+28            }else{
+29                high = mid-1;
+30            }
+31        }
+32        return low;
+33    }
+34};
