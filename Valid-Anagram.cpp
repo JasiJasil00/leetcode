@@ -1,12 +1,16 @@
-class Solution {
-public:
-    bool isAnagram(string s, string t) {
-        if(s.size()!=t.size())
-            return false;
-        unordered_map<char,int>count;
-        for(char c:s) count[c]++;
-        for(char c:t)
-            if(--count[c]<0) return false;
-        return true;
-    }
-};
+1class Solution {
+2public:
+3    bool isAnagram(string s, string t) {
+4        int m[26]={0};
+5        if(s.length()!=t.length())return false;
+6        int n = s.size();
+7        for(int i = 0 ; i < n ; i++){
+8            m[s[i]-'a']++;
+9        }
+10        for(int i = 0 ; i < n ; i++){
+11            m[t[i]-'a']--;
+12            if(m[t[i]-'a']<0)return false;
+13        }
+14        return true;
+15    }
+16};
