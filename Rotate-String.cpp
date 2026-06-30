@@ -1,21 +1,12 @@
-1
-2class Solution {
-3public:
-4    bool rotateString(string s, string goal) {
-5        if(s.size()!=goal.size())return false;
-6         if (s.size() <= 1) return s == goal;
-7
-8        int n = s.size();
-9        for(int i =0 ; i < n ;  i ++){
-10        char temp = s[n-1];
-11        s[n-1]=s[0];
-12        for(int j = 0 ; j < n-2 ; j ++){
-13            s[j]=s[j+1];
-14        }
-15        s[n-2]=temp;
-16      if (s == goal) return true;
-17
-18    }
-19    return false;
-20    }
-21};
+1class Solution {
+2public:
+3    bool rotateString(string s, string goal) {
+4        int n = s.size();
+5        for(int i = 0 ; i < n ; i++){
+6            if(s==goal)return true;
+7            s+=s[0];
+8            s.erase(s.begin()+0);
+9        }
+10        return false;
+11    }
+12};
