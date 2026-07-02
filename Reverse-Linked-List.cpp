@@ -11,20 +11,14 @@
 11class Solution {
 12public:
 13    ListNode* reverseList(ListNode* head) {
-14        if(head==nullptr)return NULL;
-15        stack<ListNode*>s;
-16        ListNode * temp = head;
-17        while(temp->next!=NULL){
-18            s.push(temp);
-19            temp=temp->next;
-20        }
-21        head = temp;
-22        while(!s.empty()){
-23            temp->next=s.top();
-24            s.pop();
-25            temp=temp->next;
-26        }
-27        temp->next=NULL;
-28        return head;
-29    }
-30};
+14        ListNode * prev = NULL;
+15        ListNode * curr = head;
+16        while(curr!=NULL){
+17            ListNode * next = curr->next;
+18            curr->next = prev;
+19            prev = curr;
+20            curr = next;
+21        }
+22        return prev;
+23    }
+24};
