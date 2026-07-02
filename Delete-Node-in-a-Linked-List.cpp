@@ -9,13 +9,14 @@
 9class Solution {
 10public:
 11    void deleteNode(ListNode* node) {
-12        ListNode  dummy(0); 
-13        dummy.next=node;
-14        ListNode * temp = &dummy;
-15        while(temp->next->next!=NULL){
-16            temp->next->val = temp->next->next->val;
-17            temp=temp->next;
-18        }
-19        temp->next=NULL;
-20    }
-21};
+12        if(node == NULL)return;
+13        ListNode * prev = NULL;
+14        ListNode * temp = node;
+15        while(temp->next!=NULL){
+16            temp->val = temp->next->val;
+17            prev = temp;
+18            temp = temp->next;
+19        }
+20        prev->next = NULL;
+21    }
+22};
