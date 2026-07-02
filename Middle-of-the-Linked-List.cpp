@@ -13,10 +13,10 @@
 13    ListNode* middleNode(ListNode* head) {
 14        ListNode * slow = head;
 15        ListNode * fast = head;
-16         while(fast != NULL && fast->next != NULL) {
-17            slow = slow->next;
-18            fast = fast->next->next;
+16        while(fast->next!=NULL && fast->next->next!=NULL){
+17            slow=slow->next;
+18            fast=fast->next->next;
 19        }
-20        return slow;
+20        return (fast->next!=NULL)? slow->next: slow;
 21    }
 22};
